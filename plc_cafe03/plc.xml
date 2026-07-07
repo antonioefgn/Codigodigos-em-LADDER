@@ -1,0 +1,2258 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0201" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ns1="http://www.plcopen.org/xml/tc6_0201">
+  <fileHeader companyName="Desconhecido" productName="Sem nome" productVersion="1" creationDateTime="2026-05-26T08:22:23"/>
+  <contentHeader name="Sem nome" modificationDateTime="2026-06-09T17:21:49">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="10" y="10"/>
+      </fbd>
+      <ld>
+        <scaling x="10" y="10"/>
+      </ld>
+      <sfc>
+        <scaling x="10" y="10"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="program0" pouType="program">
+        <interface>
+          <localVars>
+            <variable name="cancelar" address="%IX1.0">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="botao_ligar" address="%IX1.1">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="cafe_puro" address="%IX1.2">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="cafe_acucar" address="%IX1.3">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="cafe_leite_puro" address="%IX1.4">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="cafe_leite_acucar" address="%IX1.5">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="LED_cancelar" address="%QX1.0">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="LED_ligar" address="%QX1.1">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+          <localVars>
+            <variable name="M_start">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+          <localVars>
+            <variable name="sel_cafe_puro" address="%QX1.2">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="sel_cafe_acucar" address="%QX1.3">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="sel_cafe_leite_puro" address="%QX1.4">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="sel_cafe_leite_acucar" address="%QX1.5">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="S_nivel_agua" address="%IX2.0">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="S_nivel_cafe" address="%IX2.1">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="S_nivel_acucar" address="%IX2.2">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="S_nivel_leite" address="%IX2.3">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="S_xicara" address="%IX2.4">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="Valvula_leite" address="%QX2.0">
+              <type>
+                <BOOL/>
+              </type>
+              <documentation>
+                <xhtml:p><![CDATA[39]]></xhtml:p>
+              </documentation>
+            </variable>
+            <variable name="Valvula_agua" address="%QX2.1">
+              <type>
+                <BOOL/>
+              </type>
+              <documentation>
+                <xhtml:p><![CDATA[41]]></xhtml:p>
+              </documentation>
+            </variable>
+            <variable name="Valvula_saida" address="%QX2.2">
+              <type>
+                <BOOL/>
+              </type>
+              <documentation>
+                <xhtml:p><![CDATA[43]]></xhtml:p>
+              </documentation>
+            </variable>
+            <variable name="Dosador_cafe" address="%QX2.3">
+              <type>
+                <BOOL/>
+              </type>
+              <documentation>
+                <xhtml:p><![CDATA[45]]></xhtml:p>
+              </documentation>
+            </variable>
+            <variable name="Dosador_acucar" address="%QX2.4">
+              <type>
+                <BOOL/>
+              </type>
+              <documentation>
+                <xhtml:p><![CDATA[47]]></xhtml:p>
+              </documentation>
+            </variable>
+          </localVars>
+          <localVars>
+            <variable name="ingredientes_ok">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="T_ingredientes">
+              <type>
+                <derived name="TON"/>
+              </type>
+            </variable>
+            <variable name="T_mistura">
+              <type>
+                <derived name="TON"/>
+              </type>
+            </variable>
+            <variable name="T_saida">
+              <type>
+                <derived name="TON"/>
+              </type>
+            </variable>
+            <variable name="Motor_misturador">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+          <localVars>
+            <variable name="Aquecedor" address="%QX1.7">
+              <type>
+                <BOOL/>
+              </type>
+              <documentation>
+                <xhtml:p><![CDATA[37]]></xhtml:p>
+              </documentation>
+            </variable>
+            <variable name="Buzzer" address="%QX1.6">
+              <type>
+                <BOOL/>
+              </type>
+              <documentation>
+                <xhtml:p><![CDATA[35]]></xhtml:p>
+              </documentation>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <LD>
+            <leftPowerRail localId="1" width="10" height="40">
+              <position x="30" y="40"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <contact localId="3" negated="false" width="21" height="20">
+              <position x="80" y="50"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="1">
+                  <position x="80" y="60"/>
+                  <position x="40" y="60"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cancelar</variable>
+            </contact>
+            <coil localId="4" negated="false" storage="reset" width="21" height="20">
+              <position x="340" y="50"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="3">
+                  <position x="340" y="60"/>
+                  <position x="101" y="60"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_puro</variable>
+            </coil>
+            <coil localId="5" negated="false" width="21" height="20" storage="reset">
+              <position x="340" y="170"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="3">
+                  <position x="340" y="180"/>
+                  <position x="220" y="180"/>
+                  <position x="220" y="60"/>
+                  <position x="101" y="60"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_puro</variable>
+            </coil>
+            <coil localId="6" negated="false" storage="reset" width="21" height="20">
+              <position x="340" y="130"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="3">
+                  <position x="340" y="140"/>
+                  <position x="220" y="140"/>
+                  <position x="220" y="60"/>
+                  <position x="101" y="60"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </coil>
+            <coil localId="7" negated="false" storage="reset" width="21" height="20">
+              <position x="340" y="90"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="3">
+                  <position x="340" y="100"/>
+                  <position x="220" y="100"/>
+                  <position x="220" y="60"/>
+                  <position x="101" y="60"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_acucar</variable>
+            </coil>
+            <coil localId="8" negated="false" storage="reset" width="21" height="20">
+              <position x="340" y="210"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="3">
+                  <position x="340" y="220"/>
+                  <position x="220" y="220"/>
+                  <position x="220" y="60"/>
+                  <position x="101" y="60"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </coil>
+            <contact localId="9" negated="false" width="21" height="20" edge="rising">
+              <position x="160" y="280"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="37">
+                  <position x="160" y="290"/>
+                  <position x="101" y="290"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cafe_puro</variable>
+            </contact>
+            <leftPowerRail localId="10" width="10" height="40">
+              <position x="20" y="270"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="11" width="10" height="160">
+              <position x="470" y="270"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="12">
+                  <position x="470" y="290"/>
+                  <position x="360" y="290"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="13">
+                  <position x="470" y="330"/>
+                  <position x="361" y="330"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="100"/>
+                <connection refLocalId="14">
+                  <position x="470" y="370"/>
+                  <position x="361" y="370"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="140"/>
+                <connection refLocalId="15">
+                  <position x="470" y="410"/>
+                  <position x="361" y="410"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <coil localId="12" negated="false" storage="set" width="21" height="20" executionOrderId="0">
+              <position x="340" y="280"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="9">
+                  <position x="340" y="290"/>
+                  <position x="181" y="290"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_puro</variable>
+            </coil>
+            <coil localId="13" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="320"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="9">
+                  <position x="340" y="330"/>
+                  <position x="240" y="330"/>
+                  <position x="240" y="290"/>
+                  <position x="181" y="290"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_acucar</variable>
+            </coil>
+            <coil localId="14" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="360"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="9">
+                  <position x="340" y="370"/>
+                  <position x="240" y="370"/>
+                  <position x="240" y="290"/>
+                  <position x="181" y="290"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </coil>
+            <coil localId="15" negated="false" width="21" height="20" storage="reset" executionOrderId="0">
+              <position x="340" y="400"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="9">
+                  <position x="340" y="410"/>
+                  <position x="240" y="410"/>
+                  <position x="240" y="290"/>
+                  <position x="181" y="290"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_puro</variable>
+            </coil>
+            <contact localId="16" negated="false" width="21" height="20" executionOrderId="0" edge="rising">
+              <position x="160" y="500"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="38">
+                  <position x="160" y="510"/>
+                  <position x="91" y="510"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cafe_acucar</variable>
+            </contact>
+            <leftPowerRail localId="17" width="10" height="40" executionOrderId="0">
+              <position x="20" y="490"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="18" width="10" height="160" executionOrderId="0">
+              <position x="470" y="490"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="19">
+                  <position x="470" y="510"/>
+                  <position x="361" y="510"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="20">
+                  <position x="470" y="550"/>
+                  <position x="361" y="550"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="100"/>
+                <connection refLocalId="21">
+                  <position x="470" y="590"/>
+                  <position x="361" y="590"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="140"/>
+                <connection refLocalId="22">
+                  <position x="470" y="630"/>
+                  <position x="361" y="630"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <coil localId="19" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="500"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="16">
+                  <position x="340" y="510"/>
+                  <position x="181" y="510"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_puro</variable>
+            </coil>
+            <coil localId="20" negated="false" storage="set" width="21" height="20" executionOrderId="0">
+              <position x="340" y="540"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="16">
+                  <position x="340" y="550"/>
+                  <position x="240" y="550"/>
+                  <position x="240" y="510"/>
+                  <position x="181" y="510"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_acucar</variable>
+            </coil>
+            <coil localId="21" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="580"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="16">
+                  <position x="340" y="590"/>
+                  <position x="240" y="590"/>
+                  <position x="240" y="510"/>
+                  <position x="181" y="510"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </coil>
+            <coil localId="22" negated="false" width="21" height="20" storage="reset" executionOrderId="0">
+              <position x="340" y="620"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="16">
+                  <position x="340" y="630"/>
+                  <position x="240" y="630"/>
+                  <position x="240" y="510"/>
+                  <position x="181" y="510"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_puro</variable>
+            </coil>
+            <contact localId="23" negated="false" width="21" height="20" executionOrderId="0" edge="rising">
+              <position x="190" y="720"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="39">
+                  <position x="190" y="730"/>
+                  <position x="81" y="730"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cafe_leite_acucar</variable>
+            </contact>
+            <leftPowerRail localId="24" width="10" height="40" executionOrderId="0">
+              <position x="20" y="710"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="25" width="10" height="160" executionOrderId="0">
+              <position x="470" y="710"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="26">
+                  <position x="470" y="730"/>
+                  <position x="361" y="730"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="27">
+                  <position x="470" y="770"/>
+                  <position x="361" y="770"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="100"/>
+                <connection refLocalId="28">
+                  <position x="470" y="810"/>
+                  <position x="361" y="810"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="140"/>
+                <connection refLocalId="29">
+                  <position x="470" y="850"/>
+                  <position x="361" y="850"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <coil localId="26" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="720"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="23">
+                  <position x="340" y="730"/>
+                  <position x="211" y="730"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_puro</variable>
+            </coil>
+            <coil localId="27" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="760"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="23">
+                  <position x="340" y="770"/>
+                  <position x="240" y="770"/>
+                  <position x="240" y="730"/>
+                  <position x="211" y="730"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_acucar</variable>
+            </coil>
+            <coil localId="28" negated="false" storage="set" width="21" height="20" executionOrderId="0">
+              <position x="340" y="800"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="23">
+                  <position x="340" y="810"/>
+                  <position x="240" y="810"/>
+                  <position x="240" y="730"/>
+                  <position x="211" y="730"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </coil>
+            <coil localId="29" negated="false" width="21" height="20" storage="reset" executionOrderId="0">
+              <position x="340" y="840"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="23">
+                  <position x="340" y="850"/>
+                  <position x="240" y="850"/>
+                  <position x="240" y="730"/>
+                  <position x="211" y="730"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_puro</variable>
+            </coil>
+            <contact localId="30" negated="false" width="21" height="20" executionOrderId="0" edge="rising">
+              <position x="180" y="910"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="40">
+                  <position x="180" y="920"/>
+                  <position x="81" y="920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cafe_leite_puro</variable>
+            </contact>
+            <leftPowerRail localId="31" width="10" height="40" executionOrderId="0">
+              <position x="20" y="900"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="32" width="10" height="160" executionOrderId="0">
+              <position x="470" y="900"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="33">
+                  <position x="470" y="920"/>
+                  <position x="361" y="920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="34">
+                  <position x="470" y="960"/>
+                  <position x="361" y="960"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="100"/>
+                <connection refLocalId="35">
+                  <position x="470" y="1000"/>
+                  <position x="361" y="1000"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="140"/>
+                <connection refLocalId="36">
+                  <position x="470" y="1040"/>
+                  <position x="361" y="1040"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <coil localId="33" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="910"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="30">
+                  <position x="340" y="920"/>
+                  <position x="201" y="920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_puro</variable>
+            </coil>
+            <coil localId="34" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="950"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="30">
+                  <position x="340" y="960"/>
+                  <position x="240" y="960"/>
+                  <position x="240" y="920"/>
+                  <position x="201" y="920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_acucar</variable>
+            </coil>
+            <coil localId="35" negated="false" storage="reset" width="21" height="20" executionOrderId="0">
+              <position x="340" y="990"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="30">
+                  <position x="340" y="1000"/>
+                  <position x="240" y="1000"/>
+                  <position x="240" y="920"/>
+                  <position x="201" y="920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </coil>
+            <coil localId="36" negated="false" width="21" height="20" storage="set" executionOrderId="0">
+              <position x="340" y="1030"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="30">
+                  <position x="340" y="1040"/>
+                  <position x="240" y="1040"/>
+                  <position x="240" y="920"/>
+                  <position x="201" y="920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_puro</variable>
+            </coil>
+            <contact localId="37" negated="true" width="21" height="20">
+              <position x="80" y="280"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="10">
+                  <position x="80" y="290"/>
+                  <position x="30" y="290"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="38" negated="true" width="21" height="20" executionOrderId="0">
+              <position x="70" y="500"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="17">
+                  <position x="70" y="510"/>
+                  <position x="30" y="510"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="39" negated="true" width="21" height="20" executionOrderId="0">
+              <position x="60" y="720"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="24">
+                  <position x="60" y="730"/>
+                  <position x="30" y="730"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="40" negated="true" width="21" height="20" executionOrderId="0">
+              <position x="60" y="910"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="31">
+                  <position x="60" y="920"/>
+                  <position x="30" y="920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="41" negated="false" width="21" height="20" edge="rising">
+              <position x="80" y="1090"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="42">
+                  <position x="80" y="1100"/>
+                  <position x="30" y="1100"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>botao_ligar</variable>
+            </contact>
+            <leftPowerRail localId="42" width="10" height="40">
+              <position x="20" y="1080"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="43" width="10" height="80">
+              <position x="520" y="1080"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="44">
+                  <position x="520" y="1100"/>
+                  <position x="481" y="1100"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="139">
+                  <position x="520" y="1140"/>
+                  <position x="480" y="1140"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <coil localId="44" negated="false" width="21" height="20" storage="set">
+              <position x="460" y="1090"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="45">
+                  <position x="460" y="1100"/>
+                  <position x="241" y="1100"/>
+                </connection>
+                <connection refLocalId="46">
+                  <position x="460" y="1100"/>
+                  <position x="350" y="1100"/>
+                  <position x="350" y="1140"/>
+                  <position x="241" y="1140"/>
+                </connection>
+                <connection refLocalId="48">
+                  <position x="460" y="1100"/>
+                  <position x="350" y="1100"/>
+                  <position x="350" y="1180"/>
+                  <position x="241" y="1180"/>
+                </connection>
+                <connection refLocalId="47">
+                  <position x="460" y="1100"/>
+                  <position x="350" y="1100"/>
+                  <position x="350" y="1220"/>
+                  <position x="241" y="1220"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </coil>
+            <contact localId="45" negated="false" width="21" height="20">
+              <position x="220" y="1090"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="41">
+                  <position x="220" y="1100"/>
+                  <position x="101" y="1100"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cafe_acucar</variable>
+            </contact>
+            <contact localId="46" negated="false" width="21" height="20">
+              <position x="220" y="1130"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="41">
+                  <position x="220" y="1140"/>
+                  <position x="160" y="1140"/>
+                  <position x="160" y="1100"/>
+                  <position x="101" y="1100"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cafe_puro</variable>
+            </contact>
+            <contact localId="47" negated="false" width="21" height="20">
+              <position x="220" y="1210"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="41">
+                  <position x="220" y="1220"/>
+                  <position x="160" y="1220"/>
+                  <position x="160" y="1100"/>
+                  <position x="101" y="1100"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cafe_leite_acucar</variable>
+            </contact>
+            <contact localId="48" negated="false" width="21" height="20">
+              <position x="220" y="1170"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="41">
+                  <position x="220" y="1180"/>
+                  <position x="160" y="1180"/>
+                  <position x="160" y="1100"/>
+                  <position x="101" y="1100"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>cafe_leite_puro</variable>
+            </contact>
+            <comment localId="49" height="40" width="280">
+              <position x="100" y="1260"/>
+              <content>
+                <xhtml:p><![CDATA[Sistema inteligente de sensores
+]]></xhtml:p>
+              </content>
+            </comment>
+            <contact localId="50" negated="false" width="21" height="20">
+              <position x="120" y="1360"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="54">
+                  <position x="120" y="1370"/>
+                  <position x="40" y="1370"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_puro</variable>
+            </contact>
+            <contact localId="51" negated="false" width="21" height="20">
+              <position x="120" y="1400"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="54">
+                  <position x="120" y="1410"/>
+                  <position x="40" y="1410"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_acucar</variable>
+            </contact>
+            <contact localId="52" negated="false" width="21" height="20">
+              <position x="120" y="1440"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="54">
+                  <position x="120" y="1450"/>
+                  <position x="40" y="1450"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_puro</variable>
+            </contact>
+            <contact localId="53" negated="false" width="21" height="20">
+              <position x="120" y="1480"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="54">
+                  <position x="120" y="1490"/>
+                  <position x="40" y="1490"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </contact>
+            <leftPowerRail localId="54" width="10" height="160">
+              <position x="30" y="1350"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="60"/>
+              </connectionPointOut>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="100"/>
+              </connectionPointOut>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="140"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <contact localId="55" negated="false" width="21" height="20">
+              <position x="270" y="1360"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="50">
+                  <position x="270" y="1370"/>
+                  <position x="141" y="1370"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_agua</variable>
+            </contact>
+            <contact localId="56" negated="false" width="21" height="20">
+              <position x="530" y="1400"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="62">
+                  <position x="530" y="1410"/>
+                  <position x="411" y="1410"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_acucar</variable>
+            </contact>
+            <contact localId="57" negated="false" width="21" height="20">
+              <position x="390" y="1360"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="55">
+                  <position x="390" y="1370"/>
+                  <position x="291" y="1370"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_cafe</variable>
+            </contact>
+            <contact localId="58" negated="false" width="21" height="20">
+              <position x="680" y="1480"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="65">
+                  <position x="680" y="1490"/>
+                  <position x="551" y="1490"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_leite</variable>
+            </contact>
+            <contact localId="59" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="270" y="1440"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="52">
+                  <position x="270" y="1450"/>
+                  <position x="141" y="1450"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_agua</variable>
+            </contact>
+            <contact localId="60" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="270" y="1480"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="53">
+                  <position x="270" y="1490"/>
+                  <position x="141" y="1490"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_agua</variable>
+            </contact>
+            <contact localId="61" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="270" y="1400"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="51">
+                  <position x="270" y="1410"/>
+                  <position x="141" y="1410"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_agua</variable>
+            </contact>
+            <contact localId="62" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="390" y="1400"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="61">
+                  <position x="390" y="1410"/>
+                  <position x="291" y="1410"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_cafe</variable>
+            </contact>
+            <contact localId="63" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="390" y="1440"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="59">
+                  <position x="390" y="1450"/>
+                  <position x="291" y="1450"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_cafe</variable>
+            </contact>
+            <contact localId="64" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="390" y="1480"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="60">
+                  <position x="390" y="1490"/>
+                  <position x="291" y="1490"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_cafe</variable>
+            </contact>
+            <contact localId="65" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="530" y="1480"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="64">
+                  <position x="530" y="1490"/>
+                  <position x="411" y="1490"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_acucar</variable>
+            </contact>
+            <contact localId="66" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="680" y="1440"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="63">
+                  <position x="680" y="1450"/>
+                  <position x="411" y="1450"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_nivel_leite</variable>
+            </contact>
+            <rightPowerRail localId="67" width="10" height="40">
+              <position x="920" y="1350"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="68">
+                  <position x="920" y="1370"/>
+                  <position x="851" y="1370"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <coil localId="68" negated="false" width="21" height="20">
+              <position x="830" y="1360"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="57">
+                  <position x="830" y="1370"/>
+                  <position x="411" y="1370"/>
+                </connection>
+                <connection refLocalId="56">
+                  <position x="830" y="1370"/>
+                  <position x="800" y="1370"/>
+                  <position x="800" y="1410"/>
+                  <position x="551" y="1410"/>
+                </connection>
+                <connection refLocalId="66">
+                  <position x="830" y="1370"/>
+                  <position x="801" y="1370"/>
+                  <position x="801" y="1450"/>
+                  <position x="701" y="1450"/>
+                </connection>
+                <connection refLocalId="58">
+                  <position x="830" y="1370"/>
+                  <position x="800" y="1370"/>
+                  <position x="800" y="1490"/>
+                  <position x="701" y="1490"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>ingredientes_ok</variable>
+            </coil>
+            <leftPowerRail localId="72" width="10" height="40">
+              <position x="30" y="1570"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="73" width="10" height="40">
+              <position x="610" y="1570"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="74">
+                  <position x="610" y="1590"/>
+                  <position x="440" y="1590"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <contact localId="74" negated="true" width="21" height="20">
+              <position x="420" y="1580"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="75">
+                  <position x="420" y="1590"/>
+                  <position x="161" y="1590"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>ingredientes_ok</variable>
+            </contact>
+            <contact localId="75" negated="false" width="21" height="20">
+              <position x="140" y="1580"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="72">
+                  <position x="140" y="1590"/>
+                  <position x="40" y="1590"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <comment localId="76" height="40" width="140">
+              <position x="220" y="1630"/>
+              <content>
+                <xhtml:p><![CDATA[Temporizadores]]></xhtml:p>
+              </content>
+            </comment>
+            <rightPowerRail localId="78" width="10" height="40">
+              <position x="600" y="1710"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="81" formalParameter="Q">
+                  <position x="600" y="1730"/>
+                  <position x="460" y="1730"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <leftPowerRail localId="79" width="10" height="40">
+              <position x="40" y="1710"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <contact localId="80" negated="false" width="21" height="20">
+              <position x="170" y="1720"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="79">
+                  <position x="170" y="1730"/>
+                  <position x="50" y="1730"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <block localId="81" typeName="TON" instanceName="T_ingredientes" width="50" height="60">
+              <position x="410" y="1700"/>
+              <inputVariables>
+                <variable formalParameter="IN">
+                  <connectionPointIn>
+                    <relPosition x="0" y="30"/>
+                    <connection refLocalId="80">
+                      <position x="410" y="1730"/>
+                      <position x="191" y="1730"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="PT">
+                  <connectionPointIn>
+                    <relPosition x="0" y="50"/>
+                    <connection refLocalId="84">
+                      <position x="410" y="1750"/>
+                      <position x="390" y="1750"/>
+                      <position x="390" y="1760"/>
+                      <position x="380" y="1760"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables/>
+              <outputVariables>
+                <variable formalParameter="Q">
+                  <connectionPointOut>
+                    <relPosition x="50" y="30"/>
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="ET">
+                  <connectionPointOut>
+                    <relPosition x="50" y="50"/>
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <block localId="82" typeName="TON" instanceName="T_mistura" width="50" height="60">
+              <position x="410" y="1810"/>
+              <inputVariables>
+                <variable formalParameter="IN">
+                  <connectionPointIn>
+                    <relPosition x="0" y="30"/>
+                    <connection refLocalId="87">
+                      <position x="410" y="1840"/>
+                      <position x="190" y="1840"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="PT">
+                  <connectionPointIn>
+                    <relPosition x="0" y="50"/>
+                    <connection refLocalId="69">
+                      <position x="410" y="1860"/>
+                      <position x="390" y="1860"/>
+                      <position x="390" y="1880"/>
+                      <position x="370" y="1880"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables/>
+              <outputVariables>
+                <variable formalParameter="Q">
+                  <connectionPointOut>
+                    <relPosition x="50" y="30"/>
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="ET">
+                  <connectionPointOut>
+                    <relPosition x="50" y="50"/>
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <block localId="83" typeName="TON" instanceName="T_saida" width="50" height="60">
+              <position x="420" y="1930"/>
+              <inputVariables>
+                <variable formalParameter="IN">
+                  <connectionPointIn>
+                    <relPosition x="0" y="30"/>
+                    <connection refLocalId="89">
+                      <position x="420" y="1960"/>
+                      <position x="270" y="1960"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="PT">
+                  <connectionPointIn>
+                    <relPosition x="0" y="50"/>
+                    <connection refLocalId="86">
+                      <position x="420" y="1980"/>
+                      <position x="400" y="1980"/>
+                      <position x="400" y="2000"/>
+                      <position x="380" y="2000"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables/>
+              <outputVariables>
+                <variable formalParameter="Q">
+                  <connectionPointOut>
+                    <relPosition x="50" y="30"/>
+                  </connectionPointOut>
+                </variable>
+                <variable formalParameter="ET">
+                  <connectionPointOut>
+                    <relPosition x="50" y="50"/>
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <inVariable localId="84" width="50" height="30" negated="false">
+              <position x="330" y="1750"/>
+              <connectionPointOut>
+                <relPosition x="50" y="20"/>
+              </connectionPointOut>
+              <expression>T#10s</expression>
+            </inVariable>
+            <inVariable localId="69" width="50" height="30" negated="false" executionOrderId="0">
+              <position x="320" y="1860"/>
+              <connectionPointOut>
+                <relPosition x="50" y="20"/>
+              </connectionPointOut>
+              <expression>T#30s</expression>
+            </inVariable>
+            <rightPowerRail localId="70" width="10" height="40" executionOrderId="0">
+              <position x="600" y="1820"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="82" formalParameter="Q">
+                  <position x="600" y="1840"/>
+                  <position x="460" y="1840"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <rightPowerRail localId="71" width="10" height="40" executionOrderId="0">
+              <position x="600" y="1940"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="83" formalParameter="Q">
+                  <position x="600" y="1960"/>
+                  <position x="470" y="1960"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <leftPowerRail localId="77" width="10" height="40" executionOrderId="0">
+              <position x="40" y="1820"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <leftPowerRail localId="85" width="10" height="40" executionOrderId="0">
+              <position x="40" y="1940"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <inVariable localId="86" width="50" height="30" negated="false" executionOrderId="0">
+              <position x="330" y="1980"/>
+              <connectionPointOut>
+                <relPosition x="50" y="20"/>
+              </connectionPointOut>
+              <expression>T#10s</expression>
+            </inVariable>
+            <contact localId="87" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="170" y="1830"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="77">
+                  <position x="170" y="1840"/>
+                  <position x="50" y="1840"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_ingredientes.Q</variable>
+            </contact>
+            <contact localId="88" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="140" y="1950"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="85">
+                  <position x="140" y="1960"/>
+                  <position x="50" y="1960"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_mistura.Q</variable>
+            </contact>
+            <contact localId="89" negated="false" width="21" height="20">
+              <position x="250" y="1950"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="88">
+                  <position x="250" y="1960"/>
+                  <position x="161" y="1960"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_xicara</variable>
+            </contact>
+            <comment localId="90" height="40" width="250">
+              <position x="190" y="2040"/>
+              <content>
+                <xhtml:p><![CDATA[Acionamento dos atuadores]]></xhtml:p>
+              </content>
+            </comment>
+            <leftPowerRail localId="91" width="10" height="40">
+              <position x="40" y="2150"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="92" width="10" height="80" executionOrderId="0">
+              <position x="610" y="2150"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="95">
+                  <position x="610" y="2170"/>
+                  <position x="530" y="2170"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="96">
+                  <position x="610" y="2210"/>
+                  <position x="530" y="2210"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <contact localId="93" negated="false" width="21" height="20">
+              <position x="130" y="2160"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="91">
+                  <position x="130" y="2170"/>
+                  <position x="50" y="2170"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="94" negated="true" width="21" height="20">
+              <position x="260" y="2160"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="93">
+                  <position x="260" y="2170"/>
+                  <position x="151" y="2170"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_ingredientes.Q</variable>
+            </contact>
+            <coil localId="95" negated="false" width="21" height="20">
+              <position x="510" y="2160"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="94">
+                  <position x="510" y="2170"/>
+                  <position x="281" y="2170"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Valvula_agua</variable>
+            </coil>
+            <coil localId="96" negated="false" width="21" height="20">
+              <position x="510" y="2200"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="94">
+                  <position x="510" y="2210"/>
+                  <position x="395" y="2210"/>
+                  <position x="395" y="2170"/>
+                  <position x="281" y="2170"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Dosador_cafe</variable>
+            </coil>
+            <leftPowerRail localId="97" width="10" height="150">
+              <position x="40" y="2290"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="130"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="98" width="10" height="150">
+              <position x="610" y="2290"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="103">
+                  <position x="610" y="2310"/>
+                  <position x="551" y="2310"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="130"/>
+                <connection refLocalId="104">
+                  <position x="610" y="2420"/>
+                  <position x="551" y="2420"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <contact localId="99" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="90" y="2300"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="97">
+                  <position x="90" y="2310"/>
+                  <position x="50" y="2310"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="100" negated="false" width="21" height="20" executionOrderId="0">
+              <position x="90" y="2410"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="97">
+                  <position x="90" y="2420"/>
+                  <position x="50" y="2420"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="101" negated="true" width="21" height="20" executionOrderId="0">
+              <position x="200" y="2300"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="99">
+                  <position x="200" y="2310"/>
+                  <position x="111" y="2310"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_ingredientes.Q</variable>
+            </contact>
+            <contact localId="102" negated="true" width="21" height="20" executionOrderId="0">
+              <position x="200" y="2410"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="100">
+                  <position x="200" y="2420"/>
+                  <position x="111" y="2420"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_ingredientes.Q</variable>
+            </contact>
+            <coil localId="103" negated="false" width="21" height="20">
+              <position x="530" y="2300"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="105">
+                  <position x="530" y="2310"/>
+                  <position x="400" y="2310"/>
+                </connection>
+                <connection refLocalId="106">
+                  <position x="530" y="2310"/>
+                  <position x="500" y="2310"/>
+                  <position x="500" y="2360"/>
+                  <position x="400" y="2360"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Dosador_acucar</variable>
+            </coil>
+            <coil localId="104" negated="false" width="21" height="20">
+              <position x="530" y="2410"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="107">
+                  <position x="530" y="2420"/>
+                  <position x="400" y="2420"/>
+                </connection>
+                <connection refLocalId="108">
+                  <position x="530" y="2420"/>
+                  <position x="500" y="2420"/>
+                  <position x="500" y="2470"/>
+                  <position x="400" y="2470"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Valvula_leite</variable>
+            </coil>
+            <contact localId="105" negated="false" width="21" height="20">
+              <position x="380" y="2300"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="101">
+                  <position x="380" y="2310"/>
+                  <position x="221" y="2310"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_acucar</variable>
+            </contact>
+            <contact localId="106" negated="false" width="21" height="20">
+              <position x="380" y="2350"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="101">
+                  <position x="380" y="2360"/>
+                  <position x="280" y="2360"/>
+                  <position x="280" y="2310"/>
+                  <position x="221" y="2310"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </contact>
+            <contact localId="107" negated="false" width="21" height="20">
+              <position x="380" y="2410"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="102">
+                  <position x="380" y="2420"/>
+                  <position x="221" y="2420"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_puro</variable>
+            </contact>
+            <contact localId="108" negated="false" width="21" height="20">
+              <position x="380" y="2460"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="102">
+                  <position x="380" y="2470"/>
+                  <position x="270" y="2470"/>
+                  <position x="270" y="2420"/>
+                  <position x="221" y="2420"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </contact>
+            <leftPowerRail localId="109" width="10" height="40">
+              <position x="40" y="2610"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="111" width="10" height="80">
+              <position x="620" y="2610"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="116">
+                  <position x="620" y="2630"/>
+                  <position x="550" y="2630"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="117">
+                  <position x="620" y="2670"/>
+                  <position x="550" y="2670"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <comment localId="112" height="40" width="200">
+              <position x="240" y="2520"/>
+              <content>
+                <xhtml:p><![CDATA[Mistura e aquecimento]]></xhtml:p>
+              </content>
+            </comment>
+            <contact localId="113" negated="false" width="21" height="20">
+              <position x="110" y="2620"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="109">
+                  <position x="110" y="2630"/>
+                  <position x="50" y="2630"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="114" negated="false" width="21" height="20">
+              <position x="230" y="2620"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="113">
+                  <position x="230" y="2630"/>
+                  <position x="131" y="2630"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_ingredientes.Q</variable>
+            </contact>
+            <contact localId="115" negated="true" width="21" height="20">
+              <position x="360" y="2620"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="114">
+                  <position x="360" y="2630"/>
+                  <position x="251" y="2630"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_mistura.Q</variable>
+            </contact>
+            <coil localId="116" negated="false" width="21" height="20">
+              <position x="530" y="2620"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="115">
+                  <position x="530" y="2630"/>
+                  <position x="381" y="2630"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Motor_misturador</variable>
+            </coil>
+            <coil localId="117" negated="false" width="21" height="20">
+              <position x="530" y="2660"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="115">
+                  <position x="530" y="2670"/>
+                  <position x="460" y="2670"/>
+                  <position x="460" y="2630"/>
+                  <position x="381" y="2630"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Aquecedor</variable>
+            </coil>
+            <comment localId="118" height="40" width="130">
+              <position x="240" y="2700"/>
+              <content>
+                <xhtml:p><![CDATA[Servir cafe]]></xhtml:p>
+              </content>
+            </comment>
+            <leftPowerRail localId="119" width="10" height="40">
+              <position x="40" y="2820"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <rightPowerRail localId="120" width="10" height="80">
+              <position x="620" y="2820"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="126">
+                  <position x="620" y="2840"/>
+                  <position x="551" y="2840"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="140">
+                  <position x="620" y="2880"/>
+                  <position x="551" y="2880"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <comment localId="121" height="40" width="170">
+              <position x="230" y="2930"/>
+              <content>
+                <xhtml:p><![CDATA[Limpeza da memória
+]]></xhtml:p>
+              </content>
+            </comment>
+            <contact localId="122" negated="false" width="21" height="20">
+              <position x="80" y="2830"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="119">
+                  <position x="80" y="2840"/>
+                  <position x="50" y="2840"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </contact>
+            <contact localId="123" negated="false" width="21" height="20">
+              <position x="180" y="2830"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="122">
+                  <position x="180" y="2840"/>
+                  <position x="101" y="2840"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_mistura.Q</variable>
+            </contact>
+            <contact localId="124" negated="true" width="21" height="20">
+              <position x="290" y="2830"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="123">
+                  <position x="290" y="2840"/>
+                  <position x="201" y="2840"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_saida.Q</variable>
+            </contact>
+            <contact localId="125" negated="false" width="21" height="20">
+              <position x="390" y="2830"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="124">
+                  <position x="390" y="2840"/>
+                  <position x="311" y="2840"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>S_xicara</variable>
+            </contact>
+            <coil localId="126" negated="false" width="21" height="20">
+              <position x="530" y="2830"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="125">
+                  <position x="530" y="2840"/>
+                  <position x="411" y="2840"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Valvula_saida</variable>
+            </coil>
+            <leftPowerRail localId="127" width="10" height="40">
+              <position x="40" y="3000"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <contact localId="129" negated="false" width="21" height="20">
+              <position x="100" y="3010"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="127">
+                  <position x="100" y="3020"/>
+                  <position x="50" y="3020"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>T_saida.Q</variable>
+            </contact>
+            <coil localId="131" negated="false" storage="reset" width="21" height="20">
+              <position x="500" y="3010"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="110">
+                  <position x="500" y="3020"/>
+                  <position x="291" y="3020"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_acucar</variable>
+            </coil>
+            <coil localId="132" negated="false" width="21" height="20" storage="reset">
+              <position x="500" y="3050"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="110">
+                  <position x="500" y="3060"/>
+                  <position x="395" y="3060"/>
+                  <position x="395" y="3020"/>
+                  <position x="291" y="3020"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_acucar</variable>
+            </coil>
+            <coil localId="133" negated="false" width="21" height="20" storage="reset">
+              <position x="500" y="3090"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="110">
+                  <position x="500" y="3100"/>
+                  <position x="395" y="3100"/>
+                  <position x="395" y="3020"/>
+                  <position x="291" y="3020"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_leite_puro</variable>
+            </coil>
+            <coil localId="134" negated="false" width="21" height="20" storage="reset">
+              <position x="500" y="3130"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="110">
+                  <position x="500" y="3140"/>
+                  <position x="395" y="3140"/>
+                  <position x="395" y="3020"/>
+                  <position x="291" y="3020"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>sel_cafe_puro</variable>
+            </coil>
+            <coil localId="137" negated="false" width="21" height="20">
+              <position x="560" y="50"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="4">
+                  <position x="560" y="60"/>
+                  <position x="361" y="60"/>
+                </connection>
+                <connection refLocalId="7">
+                  <position x="560" y="60"/>
+                  <position x="460" y="60"/>
+                  <position x="460" y="100"/>
+                  <position x="361" y="100"/>
+                </connection>
+                <connection refLocalId="6">
+                  <position x="560" y="60"/>
+                  <position x="460" y="60"/>
+                  <position x="460" y="140"/>
+                  <position x="361" y="140"/>
+                </connection>
+                <connection refLocalId="5">
+                  <position x="560" y="60"/>
+                  <position x="460" y="60"/>
+                  <position x="460" y="180"/>
+                  <position x="361" y="180"/>
+                </connection>
+                <connection refLocalId="8">
+                  <position x="560" y="60"/>
+                  <position x="460" y="60"/>
+                  <position x="460" y="220"/>
+                  <position x="361" y="220"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>LED_cancelar</variable>
+            </coil>
+            <rightPowerRail localId="138" width="10" height="40">
+              <position x="660" y="40"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="137">
+                  <position x="660" y="60"/>
+                  <position x="580" y="60"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <coil localId="139" negated="false" width="21" height="20">
+              <position x="460" y="1130"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="46">
+                  <position x="460" y="1140"/>
+                  <position x="241" y="1140"/>
+                </connection>
+                <connection refLocalId="48">
+                  <position x="460" y="1140"/>
+                  <position x="350" y="1140"/>
+                  <position x="350" y="1180"/>
+                  <position x="241" y="1180"/>
+                </connection>
+                <connection refLocalId="47">
+                  <position x="460" y="1140"/>
+                  <position x="350" y="1140"/>
+                  <position x="350" y="1220"/>
+                  <position x="241" y="1220"/>
+                </connection>
+                <connection refLocalId="45">
+                  <position x="460" y="1140"/>
+                  <position x="350" y="1140"/>
+                  <position x="350" y="1100"/>
+                  <position x="241" y="1100"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>LED_ligar</variable>
+            </coil>
+            <coil localId="140" negated="false" width="21" height="20">
+              <position x="530" y="2870"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="125">
+                  <position x="530" y="2880"/>
+                  <position x="470" y="2880"/>
+                  <position x="470" y="2840"/>
+                  <position x="411" y="2840"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Buzzer</variable>
+            </coil>
+            <contact localId="110" negated="true" width="21" height="20" executionOrderId="0">
+              <position x="270" y="3010"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="129">
+                  <position x="270" y="3020"/>
+                  <position x="121" y="3020"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Valvula_saida</variable>
+            </contact>
+            <coil localId="141" negated="false" storage="reset" width="21" height="20">
+              <position x="500" y="3170"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="110">
+                  <position x="500" y="3180"/>
+                  <position x="395" y="3180"/>
+                  <position x="395" y="3020"/>
+                  <position x="291" y="3020"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>M_start</variable>
+            </coil>
+            <rightPowerRail localId="142" width="20" height="200">
+              <position x="650" y="3000"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="131">
+                  <position x="650" y="3020"/>
+                  <position x="521" y="3020"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="60"/>
+                <connection refLocalId="132">
+                  <position x="650" y="3060"/>
+                  <position x="521" y="3060"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="100"/>
+                <connection refLocalId="133">
+                  <position x="650" y="3100"/>
+                  <position x="521" y="3100"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="140"/>
+                <connection refLocalId="134">
+                  <position x="650" y="3140"/>
+                  <position x="521" y="3140"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointIn>
+                <relPosition x="0" y="180"/>
+                <connection refLocalId="141">
+                  <position x="650" y="3180"/>
+                  <position x="521" y="3180"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+          </LD>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations>
+      <configuration name="Config0">
+        <resource name="Res0">
+          <task name="task0" priority="0" interval="T#20ms">
+            <pouInstance name="instance0" typeName="program0"/>
+          </task>
+        </resource>
+      </configuration>
+    </configurations>
+  </instances>
+</project>
